@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="E:/Users/DELL/Desktop/Medicine.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/medicinal/medicinal_jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=medicinal/src\/main\/java&lt;com.example.medicinal{MedicinalApplication.java[MedicinalApplication" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="true">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+        <javaElement handleIdentifier="=medicinal/src\/test\/java"/>
+        <folder path="/medicinal/bin"/>
+        <file path="/medicinal/medicinal_jar.jardesc"/>
+        <file path="/medicinal/HELP.md"/>
+        <javaElement handleIdentifier="=medicinal/src\/main\/java"/>
+        <file path="/medicinal/.gitignore"/>
+        <javaElement handleIdentifier="=medicinal/src\/main\/resources"/>
+        <file path="/medicinal/.project"/>
+        <file path="/medicinal/mvnw"/>
+        <folder path="/medicinal/target"/>
+        <file path="/medicinal/pom.xml"/>
+        <folder path="/medicinal/src"/>
+        <file path="/medicinal/.classpath"/>
+        <file path="/medicinal/mvnw.cmd"/>
+    </selectedElements>
+</jardesc>

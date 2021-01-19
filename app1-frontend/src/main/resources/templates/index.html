@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Insert title here</title>
+ <style>
+		.vertical-menu a {
+		  width: 300px;
+		  background-color: #1ABC9C;
+		  color: white;
+		  display: block;
+		  padding: 14px 20px;
+		  margin: 8px 0;
+		  border: none;
+		  border-radius: 4px;
+		  text-decoration: none;
+		  cursor: pointer;
+		}
+		
+		.vertical-menu a:hover {
+		  background-color: #4682B4;
+		}
+		</style>
+</head>
+<body>
+<h1 align="center">Welcome! Version-1</h1>
+	<div style="text-align: center;">
+	<div style="display: inline-block; text-align: left;">
+ <table>
+		<tr>
+		<td style="color:#bfff00" th:text="${message}!=null?${message}">
+		</td>
+	</tr>
+<tr>
+		<td style="color:#ff0000" th:text="${Err}!=null?${Err}">
+</td>
+	</tr>
+	</table>
+	<div class="vertical-menu">
+<a href="add">Add Medicine</a>
+<a href="view">View All Medicines</a>
+<a href="viewexp">View Medicines(Expiry less than 100 days)</a>
+<a href="delete">Delete Medicine</a>
+<a href="update">Update Amount</a>
+</div>
+</div>
+</div>
+</body>
+</html>

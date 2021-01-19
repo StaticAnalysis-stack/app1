@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto11
+  post_build:
+    commands:
+    - echo building the spring-boot
+    - cd app2
+    - chmod +x scripts/cleanup.sh
+    - mvn package
+artifacts:
+  files:
+  - app2/target/*.jar
+  - app2/scripts/*.sh
+  - app2/appspec.yml
+  discard-paths: yes
+
+cache:
+  paths:
+  - '/root/.m2/**/*'
