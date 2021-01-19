@@ -1,0 +1,1 @@
+INSERT INTO user VALUES (19923,"testMail","s","s","e",3333,"test");

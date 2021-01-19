@@ -1,0 +1,316 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" id="div_title">
+    <div class="form-inline">
+        <div class="active-cyan-3 active-cyan-4 mb-4 ">
+            <input class="form-control " type="text" [(ngModel)]="searchTerm"
+                placeholder="Search For products, brands and more " aria-label="Search">
+        </div>
+        <div class="add_product">
+            <button type="button" class="btn btn-info center" data-toggle="modal" data-target="#modalAddProductFrom">Add
+                Product</button>
+        </div>
+
+        <div class="add_variant">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAddVariantFrom">Add
+                Varient</button>
+        </div>
+    </div>
+</div>
+
+<!-- Spinner -->
+<div [hidden]="isBool">
+    <div class="text-center text-primary" >
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- get Details of Product Model -->
+
+    <div class="modal fade" id="modelGetDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Product Info</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        
+      </div>
+      <div class="modal-body mx-3">
+          <form #buyProductForm="ngForm" (ngSubmit)="buyProduct()">
+        <div class="md-form mb-5">
+          <h4>Product Name</h4>
+          <h3>{{productName}}</h3>
+          <!-- <label data-error="wrong" data-success="right" for="orangeForm-name">Your name</label> -->
+        </div>
+        <div class="md-form mb-5">
+            <h4>Product Description</h4>
+            <h3>{{productDesp}}</h3>
+          <!-- <label data-error="wrong" data-success="right" for="orangeForm-email">Your email</label> -->
+        </div>
+
+        <div class="md-form mb-5">
+            <h4>Product Image</h4>
+            <img [src]="productImg" class="image-adjustment" height="180px" width="150px" >
+          <!-- <label data-error="wrong" data-success="right" for="orangeForm-pass">Your password</label> -->
+        </div>
+
+        <div class="md-form mb-4">
+            <h4> Select Variant </h4>
+            <table class="table table-bordered">
+                <thead style="background:#73C6B6">
+                    <tr>
+                        <th scope="col">vCode</th>
+                        <th scope="col">vDesc</th>
+                        <th scope="col">vColor </th>
+                        <th scope="col">vSize</th>
+                        <th scope="col">vStock</th>
+                        <th scope="col">Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let gV of getvariants;trackBy:trackByFunction">
+                       
+                        <td>{{gV.vCode}}</td>
+                        <td>{{gV.vDesc}}</td>
+                        <td>{{gV.vColor}}</td>
+                        <td>{{gV.vSize}}</td>
+                        <td>{{gV.vStock}}</td>
+
+                      <td>  <input type="radio"  name="buy" [value]="gV.vCode" [(ngModel)]="assignProduct.vCode"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="md-form mb-5">
+            <i class="fa fa-product-hunt prefix grey-text"></i>
+            <input type="number" id="pStock" name="pStock" class="form-control"
+                [(ngModel)]="assignProduct.quantity">
+            <label data-error="wrong" data-success="right" for="pStock">Enter Quantity</label>
+          </div>
+
+      
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="submit" class="btn btn-info">Buy</button>
+      </div>
+    </form>
+    </div>
+    </div>
+  </div>
+</div>
+
+ <div class="text-center">
+  <button class="btn btn-default btn-rounded mb-4" hidden=true data-toggle="modal" data-target="#modelGetDetails" #modelGetDetails>
+  </button>
+</div> 
+
+    <!-- Add Product Model -->
+
+<div class="modal fade" id="modalAddProductFrom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Product Entry</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <form #addProductForm="ngForm" (ngSubmit)="addProduct()">
+                    <div class="md-form mb-2">
+                        <i class="fa fa-barcode prefix grey-text"></i>
+                        <input type="text" id="pCode" name="pCode" class="form-control validate"
+                            [(ngModel)]="product.pCode">
+                        <label data-error="wrong" data-success="right" for="defaultForm-email">Product Code</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <input type="text" id="pName" name="pName" class="form-control validate"
+                            [(ngModel)]="product.pName">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Name</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <input type="text" id="pDesc" name="pDesc" class="form-control validate"
+                            [(ngModel)]="product.pDesc">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Product
+                            Description</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-image prefix grey-text"></i>
+                        <input type="text" id="imageUrl" name="imageUrl" class="form-control validate"
+                            [(ngModel)]="product.imageUrl">
+                        <label data-error="wrong" data-success="right" for="defaultForm-pass">Product
+                            Image address</label>
+                    </div>
+
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Variant Model -->
+<div class="modal fade" id="modalAddVariantFrom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Variant Entry</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <form #addVariantFrom="ngForm" (ngSubmit)="addVariant()">
+                    <div class="md-form mb-2">
+                        <i class="fa fa-barcode prefix grey-text"></i>
+
+                        <!-- <label for="sel1">Select list (select one):</label> -->
+                        <select class="form-control" id="pCode" name="pCode" [(ngModel)]="variant.pCode">
+                            <option *ngFor="let p of products" [value]="p.pCode">{{p.pCode}}</option>
+                        </select>
+
+                        <!-- <input type="text" id="pCode" name="pCode" class="form-control validate" [(ngModel)]="product.pCode"> -->
+                        <label data-error="wrong" data-success="right" for="pCode">Product Code</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <input type="text" id="vCode" name="vCode" class="form-control validate"
+                            [(ngModel)]="variant.vCode">
+                        <label data-error="wrong" data-success="right" for="vCode">Variant Code</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <select class="form-control" id=vCat name="vCat" [(ngModel)]="VariantCategory" >
+                            <option value="Mobiles"> Mobiles</option>
+                            <option value="Televisions">Televisions </option>
+                            <option value="Gadgets">Gadgets </option>
+                            <option value="Cloths"> Cloths</option>
+                            <option value="Computer And Laptops">Computer And Laptops </option>
+                            <option value="Furnitures">Furnitures </option>
+                            <option value="Refregirators">Refregirators </option>
+                            <option value="Washing Machines">Washing Machines </option>
+                            <option value="DishWashers">DishWashers </option>
+                            <option value="Beauty Products"> Beauty Products</option>
+                            <option value="Sports">Sports </option>
+                            <option value="Books">Books </option>
+                            <option value="Plumbing Sections">Plumbing Sections </option>
+                            <option value="Stationary"> Stationary</option>
+                        </select>
+                        <label data-error="wrong" data-success="right" for="vCat">Variant Category</label>
+                    </div>
+
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <input type="text" id="vDesc" name="vDesc" class="form-control validate"
+                            [(ngModel)]="variant.vDesc">
+                        <label data-error="wrong" data-success="right" for="vDesc">Varinat Description</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+
+                        <select class="form-control" id="vColor" name="vColor"  [(ngModel)]="variant.vColor">
+                            <option value="Red"> Red </option>
+                            <option value="Green"> Green </option>
+                            <option value="Yellow"> Yellow </option>
+                            <option value="Blue"> Blue </option>
+                            <option value="Black"> Black </option>
+                            <option value="Orange"> Orange </option>
+                            <option value="Grey"> Grey </option>
+
+                        </select>
+
+                        <label data-error="wrong" data-success="right" for="vColor">Variant
+                            Color</label>
+                    </div>
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-product-hunt prefix grey-text"></i>
+                        <div class="form-control" id="vSize" name="vSize">
+                            <label class="radio-inline">
+                                <input type="radio" value="XS" name="gender" [(ngModel)]="variant.vSize"> XS &nbsp;
+                            </label>
+                        
+                            <label class="radio-inline">
+                                <input type="radio" value="S" name="gender" [(ngModel)]="variant.vSize"> S &nbsp;
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="M" name="gender" [(ngModel)]="variant.vSize"> M &nbsp;
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="L" name="gender" [(ngModel)]="variant.vSize"> L &nbsp;
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="XL" name="gender" [(ngModel)]="variant.vSize"> XL &nbsp;
+                            </label>
+                        </div>
+                        <label data-error="wrong" data-success="right" for="vSize">Varinat Size</label>
+                    </div>
+
+
+                    <div class="md-form mb-2">
+                        <i class="fa fa-tally prefix grey-text"></i>
+                        <input type="number" id="vStock" name="vStock" class="form-control validate"
+                            [(ngModel)]="variant.vStock">
+                        <label data-error="wrong" data-success="right" for="vStock">Varinat Stock</label>
+                    </div>
+
+
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background: #E8F8F5 ">
+    <table class="table table-hover">
+        <thead style="background:#73C6B6">
+            <tr>
+                <th scope="col">PCode</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Product Name </th>
+                <th scope="col">Product Description</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let p of products | productList:searchTerm | paginate: {itemsPerPage:5,currentPage:p}; trackBy:trackByFunction">
+                <td>{{p.pCode}}</td>
+                <td> <img [src]="p.imageUrl" class="image-adjustment" height="180px" width="150px"></td>
+                <td>{{p.pName}}</td>
+                <td>{{p.pDesc}}</td>
+                <td><button class="btn btn-primary" (click)="getVariantDetails(p.pCode,p.pName,p.pDesc,p.imageUrl)">Get Details</button> </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<!-- <div class="text-center">
+      <a href="" class="btn btn-default btn-rounded mb-4" >Launch
+        Modal Login Form</a>
+    </div> -->
+<pagination-controls (pageChange)="p =$event"></pagination-controls>

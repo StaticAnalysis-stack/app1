@@ -1,0 +1,1 @@
+insert into variant_product values ("testVariantCode","testpCode");

@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - echo Entered the build phase...
+      - cd demo-api-ecommerce
+      - mvn clean package -Pprod
+  post_build:
+    commands:
+      - echo Build completed successfully
+artifacts:
+  files:
+    - demo-api-ecommerce/target/demo-api-ecommerce-0.0.1-SNAPSHOT.jar
+    - demo-api-ecommerce/appspec.yml
+    - demo-api-ecommerce/scripts/*.sh
+  discard-paths: yes

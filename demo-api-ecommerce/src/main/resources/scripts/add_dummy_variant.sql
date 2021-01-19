@@ -1,0 +1,1 @@
+insert into variant values ("testVCode","color","size","12",14);

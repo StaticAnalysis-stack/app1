@@ -1,0 +1,1 @@
+delete from product_user where p_code = "testPCode" and email_id = "testMail";

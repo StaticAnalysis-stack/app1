@@ -1,0 +1,1 @@
+delete from variant where v_code="testVCode";
