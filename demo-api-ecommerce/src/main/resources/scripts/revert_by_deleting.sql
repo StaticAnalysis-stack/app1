@@ -1,1 +1,0 @@
-delete from product where p_code ="testPCode";

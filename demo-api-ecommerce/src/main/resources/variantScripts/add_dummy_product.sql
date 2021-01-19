@@ -1,1 +1,0 @@
-insert into product values ("testpCode","testUrl","testdesc","testname");

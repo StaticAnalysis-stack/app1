@@ -1,1 +1,0 @@
-delete from product_variant where p_code="testpCode" and v_code="testVariantCode";

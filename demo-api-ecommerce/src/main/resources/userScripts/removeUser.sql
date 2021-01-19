@@ -1,1 +1,0 @@
-DELETE FROM user WHERE (`emailid` = 'admin@nttdata.com');

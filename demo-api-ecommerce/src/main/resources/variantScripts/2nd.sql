@@ -1,1 +1,0 @@
-insert into variant (vcode,vdescription, color, size, stock) values ("testVCode","testdesc","testname","kl",980);

@@ -1,1 +1,0 @@
-DELETE FROM user WHERE emailid ="vishaldeshmukh9571@gmail.com";

@@ -1,1 +1,0 @@
-delete from variant where vcode ="testVCode";

@@ -1,1 +1,0 @@
-insert into variant values ("testVariantCode","color","size","righy",56);

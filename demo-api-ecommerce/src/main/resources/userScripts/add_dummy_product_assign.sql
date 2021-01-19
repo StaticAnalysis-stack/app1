@@ -1,1 +1,0 @@
-insert into product_user(email_id,p_code,quantity,v_code) values ("admin@nttdata.com","testPCode",10,"vcode");
